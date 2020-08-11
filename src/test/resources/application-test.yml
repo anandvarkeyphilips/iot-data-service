@@ -1,0 +1,18 @@
+#This section contains the properties that will be over-written for the Test environment
+swagger:
+  host: 'localhost'
+  protocols: http, https
+server:
+  port: 80
+  servlet.context-path:
+
+spring:
+  datasource.initialization-mode: never
+  endpoints:
+    web.exposure.include: health,info
+    jmx.exposure.exclude: '*'
+  endpoint:
+    shutdown.enabled: false
+logging:
+  level.root: error
+  level.io.exnihilo.nearestplaces: error

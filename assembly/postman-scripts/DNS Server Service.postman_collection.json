@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "cf7d3a30-b1b9-4362-b973-59b9bf91a682",
+		"name": "DNS Server Service",
+		"description": "DNS Server Service helps you add,update,modify dns records in DNS server.r\n\nContact Support:\n Name: Anand Varkey Philips\n Email: anandvarkeyphilips@gmail.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "dns-records",
+			"item": [
+				{
+					"name": "{{baseUrl}}/dns-records/lookup/example.com/MX",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "561b01d1-c36f-4cb4-843e-bd0e2756dde6",
+								"exec": [
+									"pm.test(\"api response status\", () => \r",
+									"  pm.response.to.be.success );\r",
+									"pm.test(\"number of records is correct\", () => \r",
+									"  pm.expect(pm.response.json().result).to.have.lengthOf(1) );\r",
+									"pm.test(\"Checking if object is an array\", function () {\r",
+									"  pm.expect(pm.response.json().result).to.be.an('array');\r",
+									"});\r",
+									"pm.test(\"Checking if object contains object\", function () {\r",
+									"  pm.expect(pm.response.text()).to.include(\"example.com\");\r",
+									"  pm.expect(pm.response.text()).to.include(\"MX\");\r",
+									"});\r",
+									"pm.test(\"Checking if object contains any ONE of the keys\", function () {\r",
+									"  pm.expect(pm.response.text()).to.include(\"MX\");\r",
+									"});\r",
+									"pm.test(\"Check if object contains NONE of the provided keys\", function () {\r",
+									"  pm.expect(pm.response.json().result).to.not.have.any.keys('NS', 'A');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "JWT",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dns-records/lookup/example.com/MX",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dns-records",
+								"lookup",
+								"example.com",
+								"MX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{baseUrl}}/dns-records/lookup/:qname/:qtype",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c17114ba-6fa2-4d41-a933-35fdfcd0d049",
+								"exec": [
+									"pm.test(\"api response status\", () => \r",
+									"  pm.response.to.be.success );\r",
+									"pm.test(\"number of records is correct\", () => \r",
+									"  pm.expect(pm.response.json().result).to.be.an('array').that.is.empty);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "JWT",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dns-records/lookup/:qname/:qtype",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dns-records",
+								"lookup",
+								":qname",
+								":qtype"
+							],
+							"variable": [
+								{
+									"description": "(Required) qname",
+									"key": "qname",
+									"value": "<string>"
+								},
+								{
+									"description": "(Required) qtype",
+									"key": "qtype",
+									"value": "<string>"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{baseUrl}}/dns-records/lookup/examples.com/ANY",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6f3b182-a863-45ac-83cc-48536d0d4061",
+								"exec": [
+									"pm.test(\"api response status\", () => \r",
+									"  pm.response.to.be.success );\r",
+									"pm.test(\"number of records is correct\", () => \r",
+									"  pm.expect(pm.response.json().result).to.have.lengthOf(5) );\r",
+									"pm.test(\"Checking if object is an array\", function () {\r",
+									"  pm.expect(pm.response.json().result).to.be.an('array');\r",
+									"});\r",
+									"pm.test(\"Checking if object contains object\", function () {\r",
+									"  pm.expect(pm.response.text()).to.include(\"example.com\");\r",
+									"  pm.expect(pm.response.text()).to.include(\"MX\");\r",
+									"});\r",
+									"pm.test(\"Checking if object contains any ONE of the keys\", function () {\r",
+									"  pm.expect(pm.response.text()).to.include(\"MX\",'SOA','NS', 'A');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "JWT",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dns-records/lookup/example.com/ANY",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dns-records",
+								"lookup",
+								"example.com",
+								"ANY"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

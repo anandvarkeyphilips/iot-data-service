@@ -1,0 +1,26 @@
+application:
+  name: '@project.name@'
+  description: '@project.description@'
+  artifactId: '@project.artifactId@'
+  version: '@project.version@'
+swagger:
+  contactName: 'Anand Varkey Philips'
+  contactUrl: 'https://about.me/anandvarkeyphilips'
+  contactEmail: 'anandvarkeyphilips@gmail.com'
+  licenseUrl: 'https://github.com/anandvarkeyphilips/enterprise-validator/blob/master/LICENSE'
+  termsOfServiceUrl: 'https://www.termsfeed.com/live/21586f44-4d39-4c46-bc36-c6e5f0063ba0'
+spring:
+  profiles.active: dev
+  main:
+    banner-mode: "off"
+  jackson.default-property-inclusion: non-null
+  datasource:
+    url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    datasource.initialize: true
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+      hibernate.show_sql: true
+    hibernate:
+      ddl-auto: create-drop
