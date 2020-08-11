@@ -83,10 +83,13 @@ public class SensorDeviceService implements ISensorDeviceService {
             SensorDevice sensorDevice = sensorDeviceRepository.findById(Integer.parseInt(deviceId)).get();
             if(sensorDevice.getSensorDeviceDataFilter().getGreaterThan() != null){
                 List<SensorData> sensorDataList = sensorDevice.getSensorData();
-                final List<SensorData> filteredList = IntStream.range(0, sensorDataList.size() - 1)
-                        .filter(i -> sensorDataList.get(i).getData() > sensorDevice.getSensorDeviceDataFilter().getGreaterThan())
-                        .mapToObj(sensorDataList::get)
-                        .collect(Collectors.toList());
+                final List<SensorData> filteredList = new ArrayList<>();
+                for (int i = 0; i < sensorDataList.size(); i++) {
+                    if (sensorDataList.get(i).getData() > sensorDevice.getSensorDeviceDataFilter().getGreaterThan()) {
+                        SensorData sensorData = sensorDataList.get(i);
+                        filteredList.add(sensorData);
+                    }
+                }
                 sensorDevice.setSensorData(filteredList);
                 return sensorDevice;
             }
